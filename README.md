@@ -115,28 +115,27 @@ data_root/
 
 ## Dataset Preprocess
 
-1. 生成基于GMSF的行为模型的测试集与训练集, 注意需要将--root修改为你自己的保存数据的路径:
+1. Generate the training and test datasets for the behavior model based on GMSF, ensuring to modify `--root` to the path where you save your data:
 
     ```bash
     python GMSF2D/extract_particle.py --root data/
     ```
 
-2. 生成基于SPF的插帧模型的测试集与训练集的粒子坐标部分，, 注意需要将--root修改为你自己的保存数据的路径:
+2. Generate the particle coordinates for the training and test datasets for the SPF-based interpolation model, also remembering to modify `--root` to your data path:
 
     ```bash
     python data_process/extract_particle.py --root data/
     ```
 
-
 ## Evaluation
 
-1. 测试基于GMSF的行为模型, 注意需要将test.sh中的--root修改为你自己的保存数据的路径
+1. Test the behavior model based on GMSF, ensuring to update `--root` in `test.sh` to your data path:
 
     ```shell
     ./GMSF2D/test.sh
     ```
 
-2. 测试基于SPF的插帧模型, 注意需要将--root修改为你自己的保存数据的路径
+2. Test the SPF-based interpolation model, also remembering to set `--root` to your data path:
 
     ```shell
     python benchmarks/Particle.py --root data/
@@ -144,14 +143,15 @@ data_root/
 
 ## Training
 
-1. Run the following commands for training 基于GMSF的行为模型:
+1. Run the following commands for training the behavior model based on GMSF:
     ```shell
     ./GMSF2D/train.sh [CKP] [DATA] [DEN] [NPT] [STEP]
     ## e.g.
     ./GMSF2D/train.sh GMSF2D/checkpoints/MICROTUBULE-low MICROTUBULE low 85 20000
     ```
 
-2. 修改cfgs/文件夹下.yaml config文件中的data_root为你自己保存数据的路径
+2. In the `.yaml` configuration files within the `cfgs/` folder, update the `data_root` parameter to the path where you save your data.
+
 3. Before training, please first prepare the optical flows (which are used for supervision).
 
     We need to install `cupy` first before flow generation:
