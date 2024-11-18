@@ -23,7 +23,7 @@ data:
       snr: 7
       density: high
       data_root: data/SIMULATED/train # change it to your own data_root 
-      npoints: 855
+      npoints: 910
   val:
     name: datasets.particle_datasets.ParticleDataset
     params: 
@@ -32,7 +32,7 @@ data:
       snr: 7
       density: high
       data_root: data/SIMULATED/test # change it to your own data_root
-      npoints: 840
+      npoints: 765
   train_loader:
     batch_size: 1
     num_workers: 1
