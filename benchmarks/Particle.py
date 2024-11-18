@@ -19,9 +19,6 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def simulted_eval(model, dataset, snr, density, root):
     psnr_list = []
     ssim_list = []
-    savePath = os.path.join("output/benchmarks", dataset+density)
-    if not os.path.exists(savePath):
-        os.makedirs(savePath)
 
     strPath = os.path.join(root, 'SIMULATED/test/', dataset, dataset+' snr '+snr+' density '+density)
     pcPath = os.path.join(root, 'SIMULATED/test/particle-flow', dataset, dataset+' snr '+snr+' density '+density)
@@ -46,10 +43,7 @@ def simulted_eval(model, dataset, snr, density, root):
         pos2 = torch.tensor(pos2).unsqueeze(0).float().to('cuda')
         m1 = torch.tensor(m1).unsqueeze(0).float().to('cuda')
         m2 = torch.tensor(m2).unsqueeze(0).float().to('cuda')
-        if i == 0:
-            shutil.copy(os.path.join(strPath, imglist[i]), savePath)
-        if i == len(imglist)-3:
-            shutil.copy(os.path.join(strPath, imglist[i+2]), savePath)
+        
         I0 = tf.imread(osp.join(strPath, imglist[i]))
         I1 = tf.imread(osp.join(strPath, imglist[i+1]))
         I2 = tf.imread(osp.join(strPath, imglist[i+2]))
@@ -63,8 +57,6 @@ def simulted_eval(model, dataset, snr, density, root):
         with torch.no_grad():
             I1_pred = model(pos1, pos2, m1, m2, I0, I2, embt,
                             scale_factor=1.0, eval=True)['imgt_pred']
-        est_img = (I1_pred.permute(0,2,3,1).detach().cpu().numpy()[0] * 255).round().astype('uint8')
-        tf.imwrite(os.path.join(savePath, imglist[i+1]), est_img)
 
         psnr = calculate_psnr(I1_pred, I1) # .detach().cpu().numpy()
         ssim = calculate_ssim(I1_pred, I1) # .detach().cpu().numpy()
@@ -82,10 +74,7 @@ def real_eval(model, dataset, root):
         ssim_list = []
 
         strPath = os.path.join(root, 'REAL/', dataset, 'test')
-        savePath = os.path.join('output/benchmarks', dataset)
         pcPath = os.path.join(root, 'REAL/particle-flow', dataset, 'test')
-        if not os.path.exists(savePath):
-            os.makedirs(savePath)    
         imglist = os.listdir(strPath)
         imglist = [f for f in imglist if f.endswith("tif") or f.endswith("png")]    
         imglist = sorted(imglist)
@@ -106,9 +95,6 @@ def real_eval(model, dataset, root):
             pos2 = torch.tensor(pos2).unsqueeze(0).float().to('cuda')
             m1 = torch.tensor(m1).unsqueeze(0).float().to('cuda')
             m2 = torch.tensor(m2).unsqueeze(0).float().to('cuda')
-            if i == 0:
-                shutil.copy(os.path.join(strPath, imglist[i]), savePath)
-            shutil.copy(os.path.join(strPath, imglist[i+2]), savePath)  
             I0 = cv2.imread(osp.join(strPath, imglist[i]))
             I1 = cv2.imread(osp.join(strPath, imglist[i+1]))
             I2 = cv2.imread(osp.join(strPath, imglist[i+2]))
@@ -128,10 +114,6 @@ def real_eval(model, dataset, root):
             avg_ssim = np.mean(ssim_list)
             desc_str = f'[{dataset}] psnr: {avg_psnr:.02f}, ssim: {avg_ssim:.04f}'
             pbar.set_description_str(desc_str)
-
-            I1_ = (I1_pred[0].cpu().numpy().transpose(1,2,0)*255).round().astype('uint8')
-            I1_ = cv2.cvtColor(I1_, cv2.COLOR_BGR2GRAY)
-            tf.imwrite(os.path.join(savePath, imglist[i+1]), I1_)  
 
 
 def simulate(root):
