@@ -32,7 +32,7 @@ data:
       snr: 7
       density: low
       data_root: data/SIMULATED/test # change it to your own data_root
-      npoints: 75
+      npoints: 65
   train_loader:
     batch_size: 1
     num_workers: 1
