@@ -5,6 +5,10 @@ SuB-VFI is a frame interpolation method for subcellular images. SuB-VFI models t
 
 ![Demo gif](demo.gif)
 
+## Online Demo
+
+We provide a live demo for SuB-VFI at the colab <a target="_blank" href="https://colab.research.google.com/github/sduzzx857/SuB-VFI/blob/main/demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>, and you can run the model to double the temporal resolution of the sample image sequence.
+
 ## Dependencies and Installation
 1. Clone Repo
 
