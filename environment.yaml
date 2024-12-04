@@ -1,4 +1,4 @@
-name: spf
+name: subvfi
 channels:
   - pytorch
   - conda-forge
