@@ -24,7 +24,7 @@ We provide a live demo for SuB-VFI at the colab <a target="_blank" href="https:/
    ```
 ## Pretrained Models
 
-You can download the pretrained SuB-VFI model from [Google Driver](https://drive.google.com/drive/folders/1v3XXAmuJZOov1JaOiWMNhmJvKj8iM_Ee?usp=sharing)
+You can download the pretrained SuB-VFI model from [Google Drive](https://drive.google.com/drive/folders/1v3XXAmuJZOov1JaOiWMNhmJvKj8iM_Ee?usp=sharing)
 
 The model path should be as follows:
 
