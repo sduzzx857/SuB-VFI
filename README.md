@@ -1,5 +1,4 @@
 # SuB-VFI
-Official Implementation for "Subcellular behavior model enables highly precise temporal super-resolved live-cell imaging"
 
 SuB-VFI is a frame interpolation method for subcellular images. SuB-VFI models the **behavior of subcellular particles** to enhance the accuracy of particle matching and improve interpolation outcomes. 
 
