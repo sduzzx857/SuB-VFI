@@ -16,3 +16,4 @@ dependencies:
     - omegaconf==2.3.0
     - Pillow==9.4.0
     - tqdm==4.65.0
+    - tifffile==2023.8.30
